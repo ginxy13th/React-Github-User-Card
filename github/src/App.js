@@ -8,7 +8,6 @@ class App extends React.Component {
     super();
     this.state = {
       cards: [],
-      followers: [],
     }
   }
 
@@ -18,20 +17,20 @@ class App extends React.Component {
       console.log(response)
       this.setState({
       cards: [response.data],
-      followers: [response.data.followers_url]
       });
-      followers.map(() => {
-        Axios.get(`https://api.github.com/users/ginxy13th/followers`)
-        .then(response => {
-          this.setState({
-            followers: [response.data]
-          });
-        })
     })
     .catch(err => {
       console.log(err)
     }) 
-  })
+    // Axios.get('https://api/github/users/ginxy13th/followers')
+    // .then(res => {
+    //   this.setState({
+    //     followers: [res.data]
+    //   })
+    // })
+    // .catch(err => {
+    //   console.log(err)
+    // })
   }
 
   // componentDidUpdate(previousProps, previousState) {
@@ -51,6 +50,7 @@ class App extends React.Component {
       
     <div className="App">
       <h1>GitHub Profile Cards</h1>
+      <div>
       {this.state.cards.map(user => (
         <div>
         <img src={user.avatar_url} alt='avatar' />
@@ -65,6 +65,23 @@ class App extends React.Component {
        </div>
       </div> 
       ))}
+      </div>
+      {/* <div>
+      {this.state.followers.map(user => (
+        <div>
+        <img src={user.avatar_url} alt='avatar' />
+        <div>
+          <h3>{user.name}</h3>
+          <p>Location: {user.location}</p>
+          <p>Bio: {user.bio}</p>
+          <p>GitHub Profile:</p>
+          <a href={user.html_url}>{user.html_url}</a>
+          <p>Followers: {user.followers}</p>
+          <p>Following: {user.following}</p>
+       </div>
+      </div>
+      ))}
+      </div> */}
     </div>
     )
   }
