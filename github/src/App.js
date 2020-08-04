@@ -1,5 +1,4 @@
 import React from 'react';
-// import GitHubForm from './Components/githubform.js';
 import './App.css';
 import Axios from 'axios';
 
@@ -9,6 +8,7 @@ class App extends React.Component {
     super();
     this.state = {
       cards: [],
+      followers: [],
     }
   }
 
@@ -17,12 +17,21 @@ class App extends React.Component {
     .then(response => {
       console.log(response)
       this.setState({
-      cards: [response.data]
+      cards: [response.data],
+      followers: [response.data.followers_url]
       });
+      followers.map(() => {
+        Axios.get(`https://api.github.com/users/ginxy13th/followers`)
+        .then(response => {
+          this.setState({
+            followers: [response.data]
+          });
+        })
     })
     .catch(err => {
       console.log(err)
     }) 
+  })
   }
 
   // componentDidUpdate(previousProps, previousState) {
