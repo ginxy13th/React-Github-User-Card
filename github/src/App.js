@@ -13,11 +13,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    Axios.get('https://api.github.com/users/ginxy13th/')
+    Axios.get('https://api.github.com/users/ginxy13th')
     .then(response => {
       console.log(response)
       this.setState({
-      cards: response.data.data
+      cards: [response.data]
       });
     })
     .catch(err => {
@@ -47,13 +47,12 @@ class App extends React.Component {
         <img src={user.avatar_url} alt='avatar' />
         <div>
           <h3>{user.name}</h3>
-          <p>{user.login}</p>
-          <p>{user.location}</p>
-          <p>{user.bio}</p>
-          <p>{user.profile}</p>
+          <p>Location: {user.location}</p>
+          <p>Bio: {user.bio}</p>
+          <p>GitHub Profile:</p>
           <a href={user.html_url}>{user.html_url}</a>
-          <p>{user.followers_url}</p>
-          <p>{user.following_url}</p>
+          <p>Followers: {user.followers}</p>
+          <p>Following: {user.following}</p>
        </div>
       </div> 
       ))}
